@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Events | Dream Events</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --brand-dark: #345c4c;
+            --brand-accent: #c4d4cc;
+            --brand-light: #eef4f1;
+            --brand-gold: #d4af37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .serif {
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .glass-dark {
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(196, 212, 204, 0.1);
+        }
+
+        .img-zoom {
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .img-zoom:hover {
+            transform: scale(1.15);
+        }
+
+        .premium-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(196, 212, 204, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .premium-card:hover::before {
+            left: 100%;
+        }
+
+        .gallery-item {
+            opacity: 0;
+            transform: scale(0.9) translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .gallery-item.visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery-modal-thumb {
+            transition: all 0.3s ease;
+            opacity: 0.5;
+            filter: brightness(0.6);
+        }
+
+        .gallery-modal-thumb.active-gallery-modal-thumb {
+            border-color: rgba(196, 212, 204, 0.5);
+            opacity: 1;
+            filter: brightness(1);
+            transform: scale(1.05);
+        }
+
+        .gallery-modal-thumb:hover:not(.active-gallery-modal-thumb) {
+            transform: translateY(-4px);
+            opacity: 0.8;
+            filter: brightness(0.8);
+        }
+
+        #gallery-modal-main-image {
+            transition: opacity 0.4s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        #gallery-modal,
+        #event-image-modal {
+            transition: opacity 0.3s ease;
+        }
+
+        #gallery-modal:not(.hidden),
+        #event-image-modal:not(.hidden) {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        nav {
+            transition: background 0.3s ease, backdrop-filter 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 8px;
+            background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(196, 212, 204, 0.2);
+            border-radius: 12px;
+            min-width: 180px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin: 4px;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(196, 212, 204, 0.1);
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-6 lg:px-12 py-6">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="index.html">
+                    <img src="assets/logo.jpg" alt="Dream Events" class="w-11 h-11 rounded-2xl">
+                </a>
+                <div>
+                    <p class="serif text-2xl text-white leading-5">The dream</p>
+                    <p class="text-xs tracking-[0.2em] uppercase text-[color:var(--brand-accent)]">Event Management</p>
+                </div>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="index.html#about" class="text-white/80 hover:text-white transition">About</a>
+                <a href="index.html#services" class="text-white/80 hover:text-white transition">Services</a>
+                <div class="dropdown">
+                    <a href="#" class="text-white/80 hover:text-white transition flex items-center gap-1">
+                        Portfolio
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="corporate.html">Corporate</a>
+                        <a href="social.html">Social</a>
+                    </div>
+                </div>
+                <a href="index.html#contact"
+                    class="px-5 py-2 rounded-full bg-[color:var(--brand-dark)] text-white hover:bg-[#2d4f41] transition">Plan
+                    Your Event</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="recent-events" class="py-28  relative">
+        <p class="text-sm uppercase tracking-[0.3em] text-[color:var(--brand-accent)] mb-6 text-center">
+            Our Recent Corporate Events
+        </p>
+        <div class="space-y-12">
+            <div class="max-w-7xl mx-auto px-6 lg:px-12">
+                <div class="grid lg:grid-cols-2 gap-12 items-start">
+
+                    <!-- LEFT SIDE : TEXT CONTENT -->
+                    <div class="fade-in">
+
+
+                        <h2 class="text-4xl sm:text-5xl font-bold mb-8 serif">
+                            META MEDICON – NATIONAL DIABETES CONFERENCE, VADODARA
+                        </h2>
+
+                        <div
+                            class="space-y-6 text-white/80 leading-relaxed text-justify max-h-[500px] overflow-y-auto pr-4 scrollbar-hide">
+
+                            <p>
+                                Meta Medicon is a prestigious national-level diabetes conference that brought together
+                                eminent endocrinologists, physicians, researchers, and healthcare professionals from
+                                across India. Hosted in Vadodara, the conference served as a focused platform for
+                                scientific exchange, clinical excellence, and collaborative learning in diabetes care.
+                            </p>
+
+                            <p>
+                                Designed with precision and professionalism, the conference reflected the stature of
+                                a national medical gathering. From seamless registrations and well-curated scientific
+                                sessions to expert panel discussions and keynote lectures, every element was executed
+                                with clarity, discipline, and elegance.
+                            </p>
+
+                            <p>
+                                Meta Medicon featured evidence-based discussions on advanced diabetes management,
+                                emerging therapies, technology-driven care, and patient-centric treatment approaches.
+                                The sessions encouraged meaningful dialogue, practical insights, and knowledge
+                                sharing that directly supports real-world clinical practice.
+                            </p>
+
+                            <p class="italic text-[color:var(--brand-accent)]">
+                                “Advancing diabetes care through science, collaboration, and innovation —
+                                shaping a healthier future together.”
+                            </p>
+
+                            <p>
+                                With its strong academic foundation and refined execution, Meta Medicon established
+                                itself as a benchmark national conference, reinforcing Vadodara’s growing prominence
+                                as a destination for high-quality medical and scientific events.
+                            </p>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT SIDE : IMAGE GALLERY -->
+                    <div class="fade-in">
+                        <p
+                            class="text-sm uppercase tracking-[0.3em] text-[color:var(--brand-accent)] mb-6 text-justify">
+                            A meticulously planned national medical conference — where scientific excellence meets
+                            refined execution
+                        </p>
+
+                        <!-- MAIN IMAGE -->
+                        <div class="relative overflow-hidden rounded-2xl mb-6 h-[500px] premium-card cursor-pointer"
+                            id="main-event-image-container">
+                            <img id="main-event-image" src="images/metamedicon/metamedicon1.jpg"
+                                alt="Meta Medicon Conference"
+                                class="w-full h-full object-cover img-zoom transition-opacity duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                        </div>
+
+                        <!-- THUMBNAIL CAROUSEL -->
+                        <div class="relative group">
+                            <div id="thumbnail-carousel" class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb active-thumb"
+                                    data-image="images/metamedicon/metamedicon1.jpg">
+                                    <img src="images/metamedicon/metamedicon1.jpg" alt="Conference Session"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/metamedicon/metamedicon2.jpg">
+                                    <img src="images/metamedicon/metamedicon2.jpg" alt="Medical Panel Discussion"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/metamedicon/metamedicon3.jpg">
+                                    <img src="images/metamedicon/metamedicon3.jpg" alt="Doctor Networking"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/metamedicon/metamedicon4.jpg">
+                                    <img src="images/metamedicon/metamedicon4.jpg" alt="Conference Auditorium"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/metamedicon/metamedicon5.jpg">
+                                    <img src="images/metamedicon/metamedicon5.jpg" alt="Conference Auditorium"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/metamedicon/metamedicon6.jpg">
+                                    <img src="images/metamedicon/metamedicon6.jpg" alt="Conference Auditorium"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/metamedicon/metamedicon7.jpg">
+                                    <img src="images/metamedicon/metamedicon7.jpg" alt="Conference Auditorium"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/metamedicon/metamedicon8.jpg">
+                                    <img src="images/metamedicon/metamedicon8.jpg" alt="Conference Auditorium"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/metamedicon/metamedicon9.jpg">
+                                    <img src="images/metamedicon/metamedicon9.jpg" alt="Conference Auditorium"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/metamedicon/metamedicon10.jpg">
+                                    <img src="images/metamedicon/metamedicon10.jpg" alt="Conference Auditorium"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/metamedicon/metamedicon11.jpg">
+                                    <img src="images/metamedicon/metamedicon11.jpg" alt="Conference Auditorium"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/metamedicon/metamedicon12.jpg">
+                                    <img src="images/metamedicon/metamedicon12.jpg" alt="Conference Auditorium"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                            </div>
+
+                            <!-- NAVIGATION ARROWS -->
+                            <button id="prev-event-image"
+                                class="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-sm flex items-center justify-center text-white transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-110 z-10 shadow-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
+
+                            <button id="next-event-image"
+                                class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-sm flex items-center justify-center text-white transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-110 z-10 shadow-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="max-w-7xl mx-auto px-6 lg:px-12">
+                <div class="grid lg:grid-cols-2 gap-12 items-start">
+
+                    <!-- LEFT SIDE : TEXT CONTENT -->
+                    <div class="fade-in">
+
+                        <h2 class="text-4xl sm:text-5xl font-bold mb-8 serif">
+                            SWASTHYACON 2025 – INTERNATIONAL DIABETES CONFERENCE, AHMEDABAD
+                        </h2>
+
+                        <div
+                            class="space-y-6 text-white/80 leading-relaxed text-justify max-h-[500px] overflow-y-auto pr-4 scrollbar-hide ">
+
+                            <p>
+                                SwasthyaCon is a distinguished international diabetes conference hosted in Ahmedabad,
+                                bringing together globally respected diabetologists, physicians, researchers, policy
+                                makers, and healthcare leaders from India and abroad.
+                            </p>
+
+                            <p>
+                                The conference was thoughtfully curated to promote advanced clinical knowledge,
+                                evidence-based practice, and collaborative innovation in diabetes care. Scientific
+                                sessions were designed around real-world challenges, new treatment protocols, and
+                                the latest technological advancements in prevention and management.
+                            </p>
+
+                            <p>
+                                Expert-led panel discussions, keynote addresses, interactive case studies, and
+                                multidisciplinary dialogues created a meaningful platform for learning and
+                                professional growth. The event also emphasized lifestyle medicine, digital
+                                health, and holistic approaches to improving patient outcomes.
+                            </p>
+
+                            <p class="italic text-[color:var(--brand-accent)]">
+                                “Uniting clinical wisdom, global perspectives, and compassionate care —
+                                building a stronger future in diabetes management.”
+                            </p>
+
+                            <p>
+                                With its international participation and well-structured academic excellence,
+                                SwasthyaCon continues to strengthen Ahmedabad’s position as a center
+                                for progressive medical education and global healthcare dialogue.
+                            </p>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT SIDE : IMAGE GALLERY -->
+                    <div class="fade-in">
+                        <p
+                            class="text-sm uppercase tracking-[0.3em] text-[color:var(--brand-accent)] mb-6 text-justify">
+                            An international platform where innovation, research and clinical excellence come together
+                        </p>
+
+                        <!-- MAIN IMAGE -->
+                        <div class="relative overflow-hidden rounded-2xl mb-6 h-[500px] premium-card cursor-pointer"
+                            id="main-event-image-container">
+                            <img id="main-event-image" src="images/Swasthyacon2025/swasthyacon2.jpeg"
+                                alt="SwasthyaCon International Diabetes Conference"
+                                class="w-full h-full object-cover img-zoom transition-opacity duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                        </div>
+
+                        <!-- THUMBNAIL CAROUSEL -->
+                        <div class="relative group">
+                            <div id="thumbnail-carousel" class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb active-thumb"
+                                    data-image="images/Swasthyacon2025/swasthyacon1.mp4">
+                                    <video src="images/Swasthyacon2025/swasthyacon1.mp4"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    </video>
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition">
+                                    </div>
+                                </div>
+
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/Swasthyacon2025/swasthyacon2.jpeg">
+                                    <img src="images/Swasthyacon2025/swasthyacon2.jpeg" alt="Panel Discussion"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/Swasthyacon2025/swasthyacon3.jpeg">
+                                    <img src="images/Swasthyacon2025/swasthyacon3.jpeg" alt="Doctor Interaction"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/Swasthyacon2025/swasthyacon4.jpeg">
+                                    <img src="images/Swasthyacon2025/swasthyacon4.jpeg" alt="Scientific Session"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/Swasthyacon2025/swasthyacon5.mp4">
+                                    <video src="images/Swasthyacon2025/swasthyacon5.mp4"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    </video>
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition">
+                                    </div>
+                                </div>
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/Swasthyacon2025/swasthyacon6.jpeg">
+                                    <img src="images/Swasthyacon2025/swasthyacon6.jpeg" alt="Conference Networking"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/Swasthyacon2025/swasthyacon7.jpeg">
+                                    <img src="images/Swasthyacon2025/swasthyacon7.jpeg" alt="Conference Networking"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/Swasthyacon2025/swasthyacon8.jpeg">
+                                    <img src="images/Swasthyacon2025/swasthyacon8.jpeg" alt="Conference Networking"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/Swasthyacon2025/swasthyacon9.jpeg">
+                                    <img src="images/Swasthyacon2025/swasthyacon9.jpeg" alt="Conference Networking"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/Swasthyacon2025/swasthyacon10.jpeg">
+                                    <img src="images/Swasthyacon2025/swasthyacon10.jpeg" alt="Conference Networking"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/Swasthyacon2025/swasthyacon11.jpeg">
+                                    <img src="images/Swasthyacon2025/swasthyacon11.jpeg" alt="Conference Networking"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                            </div>
+
+                            <!-- NAVIGATION ARROWS -->
+                            <button id="prev-event-image"
+                                class="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-sm flex items-center justify-center text-white transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-110 z-10 shadow-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
+
+                            <button id="next-event-image"
+                                class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-sm flex items-center justify-center text-white transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-110 z-10 shadow-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+        // Navigation scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Fade in animations
+        document.querySelectorAll('.fade-in').forEach(el => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            observer.observe(el);
+        });
+
+        // Event thumbnail carousel - Handle multiple event sections
+        function initializeEventCarousel(imageContainer) {
+            // Find all related elements within the same event section
+            const eventSection = imageContainer.closest('.grid');
+            if (!eventSection) return;
+
+            const thumbnailGroup = eventSection.querySelector('.relative.group');
+            if (!thumbnailGroup) return;
+
+            const eventThumbs = thumbnailGroup.querySelectorAll('.event-thumb');
+            const prevButton = thumbnailGroup.querySelector('#prev-event-image');
+            const nextButton = thumbnailGroup.querySelector('#next-event-image');
+            const thumbnailCarousel = thumbnailGroup.querySelector('#thumbnail-carousel');
+
+            // Helper function to get current main element (img or video)
+            function getMainElement() {
+                return imageContainer.querySelector('img, video');
+            }
+
+            if (!eventThumbs.length || !getMainElement()) return;
+
+            let currentImageIndex = 0;
+
+            function scrollToThumbnail(index) {
+                if (!thumbnailCarousel || eventThumbs.length === 0) return;
+
+                const thumb = eventThumbs[index];
+                if (!thumb) return;
+
+                const thumbLeft = thumb.offsetLeft;
+                const thumbWidth = thumb.offsetWidth;
+                const carouselWidth = thumbnailCarousel.offsetWidth;
+
+                // Calculate scroll position to center the thumbnail
+                const targetScroll = thumbLeft - (carouselWidth / 2) + (thumbWidth / 2);
+
+                thumbnailCarousel.scrollTo({
+                    left: targetScroll,
+                    behavior: 'smooth'
+                });
+            }
+
+            function updateMainImage(index) {
+                if (eventThumbs.length === 0) return;
+
+                // Ensure index is within bounds
+                if (index < 0) index = eventThumbs.length - 1;
+                if (index >= eventThumbs.length) index = 0;
+
+                currentImageIndex = index;
+                const thumb = eventThumbs[index];
+                const newImageSrc = thumb.dataset.image;
+
+                if (newImageSrc) {
+                    const mainElement = getMainElement();
+                    if (!mainElement) return;
+
+                    // Remove active class from all thumbs
+                    eventThumbs.forEach(t => t.classList.remove('active-thumb'));
+                    // Add active class to current thumb
+                    thumb.classList.add('active-thumb');
+                    // Scroll to show the active thumbnail
+                    scrollToThumbnail(index);
+                    
+                    // Check if it's a video file
+                    const isVideo = newImageSrc.endsWith('.mp4') || newImageSrc.endsWith('.webm') || newImageSrc.endsWith('.mov');
+                    
+                    // Update main image with fade effect
+                    mainElement.style.opacity = '0';
+                    setTimeout(() => {
+                        if (isVideo) {
+                            // If current element is img, replace with video
+                            if (mainElement.tagName === 'IMG') {
+                                const video = document.createElement('video');
+                                video.src = newImageSrc;
+                                video.className = mainElement.className;
+                                video.id = 'main-event-image';
+                                video.setAttribute('autoplay', '');
+                                video.setAttribute('loop', '');
+                                video.setAttribute('muted', '');
+                                video.setAttribute('playsinline', '');
+                                video.style.opacity = '0';
+                                mainElement.parentNode.replaceChild(video, mainElement);
+                                const newElement = getMainElement();
+                                if (newElement) {
+                                    newElement.style.opacity = '1';
+                                }
+                            } else {
+                                // Already a video element
+                                mainElement.src = newImageSrc;
+                                mainElement.load();
+                                mainElement.style.opacity = '1';
+                            }
+                        } else {
+                            // If current element is video, replace with img
+                            if (mainElement.tagName === 'VIDEO') {
+                                const img = document.createElement('img');
+                                img.src = newImageSrc;
+                                img.className = mainElement.className;
+                                img.alt = 'Event Image';
+                                img.id = 'main-event-image';
+                                img.style.opacity = '0';
+                                mainElement.parentNode.replaceChild(img, mainElement);
+                                const newElement = getMainElement();
+                                if (newElement) {
+                                    newElement.style.opacity = '1';
+                                }
+                            } else {
+                                // Already an img element
+                                mainElement.src = newImageSrc;
+                                mainElement.style.opacity = '1';
+                            }
+                        }
+                    }, 200);
+                }
+            }
+
+            // Thumbnail click handler
+            eventThumbs.forEach((thumb, index) => {
+                thumb.addEventListener('click', () => {
+                    updateMainImage(index);
+                });
+            });
+
+            // Previous button handler
+            if (prevButton) {
+                prevButton.addEventListener('click', () => {
+                    updateMainImage(currentImageIndex - 1);
+                });
+            }
+
+            // Next button handler
+            if (nextButton) {
+                nextButton.addEventListener('click', () => {
+                    updateMainImage(currentImageIndex + 1);
+                });
+            }
+        }
+
+        // Initialize carousel for each event section
+        document.querySelectorAll('#main-event-image-container').forEach(container => {
+            initializeEventCarousel(container);
+        });
+    </script>
+</body>
+
+</html>

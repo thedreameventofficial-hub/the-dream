@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Events | Corporate & Social Event Management</title>
+    <meta name="description"
+        content="Dream Events delivers creative, end-to-end corporate and social event management—conferences, launches, weddings, celebrations, and more. Plan your event with our expert team.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --brand-dark: #345c4c;
+            --brand-accent: #c4d4cc;
+            --brand-light: #eef4f1;
+            --brand-gold: #d4af37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .serif {
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+        }
+
+        /* Smooth fade-in animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Parallax scrolling effect */
+        .parallax-slow {
+            transition: transform 0.3s ease-out;
+        }
+
+        /* Text reveal animation */
+        .text-reveal {
+            overflow: hidden;
+        }
+
+        .text-reveal span {
+            display: inline-block;
+            transform: translateY(100%);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .text-reveal.visible span {
+            transform: translateY(0);
+        }
+
+        /* Glow effects */
+        .glow-green {
+            box-shadow: 0 0 20px rgba(52, 92, 76, 0.3), 0 0 40px rgba(52, 92, 76, 0.2);
+        }
+
+        .glow-green:hover {
+            box-shadow: 0 0 30px rgba(52, 92, 76, 0.5), 0 0 60px rgba(52, 92, 76, 0.3);
+        }
+
+        /* Smooth hover transitions */
+        .hover-lift {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Glass morphism */
+        .glass-dark {
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(196, 212, 204, 0.1);
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #c4d4cc 0%, #345c4c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Animated background orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        /* Number counter animation */
+        .counter {
+            display: inline-block;
+        }
+
+        /* Smooth scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #345c4c, #c4d4cc);
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+
+        /* Image reveal on scroll */
+        .img-reveal {
+            opacity: 0;
+            transform: scale(1.1);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .img-reveal.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Button shine effect */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-shine::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-shine:hover::before {
+            left: 100%;
+        }
+
+        /* Section divider */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(196, 212, 204, 0.3), transparent);
+            margin: 80px 0;
+        }
+
+        /* Navigation */
+        nav {
+            transition: background 0.3s ease, backdrop-filter 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+        }
+
+        /* Hero text animation */
+        .hero-text {
+            opacity: 0;
+            animation: heroFadeIn 1.2s ease forwards;
+        }
+
+        @keyframes heroFadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .hero-text-delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .hero-text-delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .hero-text-delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        /* Card hover effect */
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(196, 212, 204, 0.5);
+        }
+
+        /* Smooth number animation */
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Royal Event style text reveal */
+        .text-split {
+            overflow: hidden;
+        }
+
+        .text-split span {
+            display: inline-block;
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+        }
+
+        .text-split.visible span {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Staggered animation delays */
+        .stagger-1 {
+            transition-delay: 0.1s;
+        }
+
+        .stagger-2 {
+            transition-delay: 0.2s;
+        }
+
+        .stagger-3 {
+            transition-delay: 0.3s;
+        }
+
+        .stagger-4 {
+            transition-delay: 0.4s;
+        }
+
+        .stagger-5 {
+            transition-delay: 0.5s;
+        }
+
+        .stagger-6 {
+            transition-delay: 0.6s;
+        }
+
+        /* Enhanced image hover */
+        .img-zoom {
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .img-zoom:hover {
+            transform: scale(1.15);
+        }
+
+        /* Premium card effect */
+        .premium-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(196, 212, 204, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .premium-card:hover::before {
+            left: 100%;
+        }
+
+        /* Smooth section transitions */
+        section {
+            position: relative;
+        }
+
+        /* Enhanced button animations */
+        .btn-premium {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-premium::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .btn-premium:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Scroll-triggered animations */
+        .scroll-fade {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .scroll-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Enhanced gallery reveal */
+        .gallery-item {
+            opacity: 0;
+            transform: scale(0.9) translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .gallery-item.visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        /* Premium text gradient animation */
+        @keyframes gradient-shift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .gradient-animated {
+            background: linear-gradient(-45deg, #c4d4cc, #345c4c, #c4d4cc, #2d4f41);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 8s ease infinite;
+        }
+
+        /* Thumbnail carousel styles */
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .event-thumb {
+            transition: all 0.3s ease;
+            opacity: 0.5;
+            filter: brightness(0.6);
+        }
+
+        .event-thumb.active-thumb {
+            border-color: rgba(196, 212, 204, 0.5);
+            opacity: 1;
+            filter: brightness(1);
+            transform: scale(1.05);
+        }
+
+        .event-thumb:hover:not(.active-thumb) {
+            transform: translateY(-4px);
+            opacity: 0.8;
+            filter: brightness(0.8);
+        }
+
+        .gallery-modal-thumb {
+            transition: all 0.3s ease;
+            opacity: 0.5;
+            filter: brightness(0.6);
+        }
+
+        .gallery-modal-thumb.active-gallery-modal-thumb {
+            border-color: rgba(196, 212, 204, 0.5);
+            opacity: 1;
+            filter: brightness(1);
+            transform: scale(1.05);
+        }
+
+        .gallery-modal-thumb:hover:not(.active-gallery-modal-thumb) {
+            transform: translateY(-4px);
+            opacity: 0.8;
+            filter: brightness(0.8);
+        }
+
+        #main-event-image,
+        #gallery-modal-main-image {
+            transition: opacity 0.4s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        #gallery-modal,
+        #event-image-modal {
+            transition: opacity 0.3s ease;
+        }
+
+        #gallery-modal:not(.hidden),
+        #event-image-modal:not(.hidden) {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 8px;
+            background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(196, 212, 204, 0.2);
+            border-radius: 12px;
+            min-width: 180px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin: 4px;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(196, 212, 204, 0.1);
+            color: #ffffff;
+        }
+
+        /* Floating Contact Buttons */
+        .floating-buttons {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 1000;
+        }
+
+        .floating-button {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            background: #ffffff;
+        }
+
+        .floating-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .floating-button.whatsapp {
+            background: #ffffff;
+        }
+
+        .floating-button.telegram {
+            background: #ffffff;
+        }
+
+        .floating-button svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .floating-button.whatsapp svg {
+            fill: #25D366;
+        }
+
+        .floating-button.telegram svg {
+            fill: #0088cc;
+        }
+
+        @media (max-width: 768px) {
+            .floating-buttons {
+                bottom: 20px;
+                right: 20px;
+                gap: 10px;
+            }
+
+            .floating-button {
+                width: 50px;
+                height: 50px;
+            }
+
+            .floating-button svg {
+                width: 24px;
+                height: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-6 lg:px-12 py-6">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="assets/logo.jpg" alt="Dream Events" class="w-11 h-11 rounded-2xl">
+                <div>
+                    <p class="serif text-2xl text-white leading-5">The dream</p>
+                    <p class="text-xs tracking-[0.2em] uppercase text-[color:var(--brand-accent)]">Event Management</p>
+                </div>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#about" class="text-white/80 hover:text-white transition">About</a>
+                <a href="#services" class="text-white/80 hover:text-white transition">Services</a>
+                <div class="dropdown">
+                    <a href="#" class="text-white/80 hover:text-white transition flex items-center gap-1">
+                        Portfolio
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="corporate.html">Corporate</a>
+                        <a href="social.html">Social</a>
+                    </div>
+                </div>
+                <a href="#contact"
+                    class="px-5 py-2 rounded-full bg-[color:var(--brand-dark)] text-white hover:bg-[#2d4f41] transition btn-shine">Plan
+                    Your Event</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- Animated Background Orbs -->
+        <div class="orb w-96 h-96 bg-[color:var(--brand-dark)] top-20 left-10"></div>
+        <div class="orb w-80 h-80 bg-[color:var(--brand-accent)] bottom-20 right-20" style="animation-delay: -5s;">
+        </div>
+        <div class="orb w-72 h-72 bg-[#2d4f41] top-1/2 left-1/2" style="animation-delay: -10s;"></div>
+
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black"></div>
+            <div
+                class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center bg-no-repeat opacity-30">
+            </div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 text-center">
+            <p class="text-sm uppercase tracking-[0.3em] text-[color:var(--brand-accent)] mb-4 hero-text">Event
+                Management Company</p>
+            <h1 class="text-5xl sm:text-6xl lg:text-8xl font-bold mb-6 hero-text hero-text-delay-1">
+                <span class="block">Here</span>
+                <span class="block serif gradient-animated mt-2">dreams come true</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto mb-8 hero-text hero-text-delay-2">
+                Dream Events — a private event organizer where every detail highlights your status and uniqueness
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 hero-text hero-text-delay-3">
+                <a href="#contact"
+                    class="px-8 py-4 rounded-full bg-[color:var(--brand-dark)] text-white font-semibold hover-lift btn-premium glow-green relative z-10">
+                    Plan Your Event</a>
+                <a href="#contact"
+                    class="px-8 py-4 rounded-full border-2 border-[color:var(--brand-accent)] text-white font-semibold hover:bg-[color:var(--brand-accent)]/10 transition">
+                    Get Free Consultation</a>
+            </div>
+        </div>
+
+        <!-- Scroll Down Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
+            <i class="bx bx-chevron-down text-3xl text-[color:var(--brand-accent)]"></i>
+        </div>
+    </header>
+
+    <main>
+        <!-- Stats Section -->
+        <!-- <section class="py-20 relative">
+            <div class="max-w-6xl mx-auto px-6 lg:px-12 grid sm:grid-cols-3 gap-8">
+                <div class="text-center fade-in">
+                    <p class="text-5xl font-bold text-[color:var(--brand-accent)] mb-2 counter" data-target="150">0</p>
+                    <p class="text-white/70 uppercase tracking-wider text-sm">Corporate Events</p>
+                </div>
+                <div class="text-center fade-in">
+                    <p class="text-5xl font-bold text-[color:var(--brand-accent)] mb-2 counter" data-target="98">0</p>
+                    <p class="text-white/70 uppercase tracking-wider text-sm">Client Satisfaction %</p>
+                </div>
+                <div class="text-center fade-in">
+                    <p class="text-5xl font-bold text-[color:var(--brand-accent)] mb-2 counter" data-target="10">0</p>
+                    <p class="text-white/70 uppercase tracking-wider text-sm">Years Experience</p>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- <div class="section-divider"></div> -->
+
+        <!-- About Section -->
+        <section id="about" class="py-20 relative">
+            <div class="max-w-6xl mx-auto px-6 lg:px-12">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="fade-in">
+
+                        <h2 class="text-4xl sm:text-5xl font-bold mb-6 serif">Who We Are</h2>
+                        <p class="text-lg text-white/70 mb-6">
+                            At Dream Events, we create refined corporate and social experiences by blending creativity,
+                            precision, and attention to detail. Every event is thoughtfully designed to reflect your
+                            vision, values, and emotions — delivered with elegance and seamless execution.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="glass-dark rounded-2xl p-6 card-hover">
+                                <p class="font-semibold text-[color:var(--brand-accent)] mb-2">Our Mission</p>
+                                <p class="text-white/70">To craft exceptional events that exceed expectations and create
+                                    lasting impressions.</p>
+                            </div>
+                            <div class="glass-dark rounded-2xl p-6 card-hover">
+                                <p class="font-semibold text-[color:var(--brand-accent)] mb-2">Our Vision</p>
+                                <p class="text-white/70">To be a trusted name in luxury corporate and social event
+                                    management, known for quality, innovation, and reliability.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative fade-in">
+                        <div class="relative overflow-hidden rounded-[20px] h-[500px] img-reveal">
+                            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80"
+                                alt="Event Planning Team" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent">
+                            </div>
+                            <div class="absolute bottom-0 left-0 right-0 p-8">
+                                <p class="text-xl font-semibold mb-2">One team. One vision. One flawless event.</p>
+                                <p class="text-white/80">From concept to curtain-call, we manage every detail.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section id="team" class="py-20 relative">
+            <div class="max-w-6xl mx-auto px-6 lg:px-12">
+                <div class="text-center mb-16 fade-in">
+                    <p class="text-sm uppercase tracking-[0.3em] text-[color:var(--brand-accent)] mb-4">Our Team</p>
+                    <h2 class="text-4xl sm:text-5xl font-bold mb-4 serif">Meet the Dream Team</h2>
+                    <p class="text-lg text-white/70 max-w-2xl mx-auto">Passionate professionals dedicated to creating
+                        extraordinary events</p>
+                </div>
+                <div class="grid md:grid-cols-4 sm:grid-cols-2 gap-6">
+                    <!-- Team Member 1 -->
+                    <div class="relative group overflow-hidden rounded-2xl h-80 fade-in premium-card">
+                        <img src="images/team/yash.png"
+                            alt="Team Member" class="w-full h-full object-cover img-zoom">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <p class="text-xl font-bold mb-1">Yash Patel</p>
+                            <p class="text-sm text-[color:var(--brand-accent)]">Event Planner</p>
+                        </div>
+                    </div>
+                    <!-- Team Member 2 -->
+                    <div class="relative group overflow-hidden rounded-2xl h-80 fade-in premium-card stagger-1">
+                        <img src="images/team/jaypatel.png"
+                            alt="Team Member" class="w-full h-full object-cover img-zoom">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <p class="text-xl font-bold mb-1">Jay Patel</p>
+                            <p class="text-sm text-[color:var(--brand-accent)]">Event Planner</p>
+                        </div>
+                    </div>
+                    <!-- Team Member 3 -->
+                    <div class="relative group overflow-hidden rounded-2xl h-80 fade-in premium-card stagger-2">
+                        <img src="images/team/jay.png"
+                            alt="Team Member" class="w-full h-full object-cover img-zoom">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <p class="text-xl font-bold mb-1">Jay Patel</p>
+                            <p class="text-sm text-[color:var(--brand-accent)]">Event Planner</p>
+                        </div>
+                    </div>
+                    <!-- Team Member 4 -->
+                    <div class="relative group overflow-hidden rounded-2xl h-80 fade-in premium-card stagger-3">
+                        <img src="images/team/sumit.png"
+                            alt="Team Member" class="w-full h-full object-cover img-zoom">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <p class="text-xl font-bold mb-1">Sumit Patel</p>
+                            <p class="text-sm text-[color:var(--brand-accent)]">Event Manager</p>
+                        </div>
+                    </div>
+                    <!-- Team Member 5 -->
+                    <div class="relative group overflow-hidden rounded-2xl h-80 fade-in premium-card stagger-4">
+                        <img src="images/team/kirtan.png"
+                            alt="Team Member" class="w-full h-full object-cover img-zoom">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <p class="text-xl font-bold mb-1">Kirtan Patel</p>
+                            <p class="text-sm text-[color:var(--brand-accent)]">Event Manager</p>
+                        </div>
+                    </div>
+                    <!-- Team Member 6 -->
+                    <div class="relative group overflow-hidden rounded-2xl h-80 fade-in premium-card stagger-5">
+                        <img src="images/team/divy.png"
+                            alt="Team Member" class="w-full h-full object-cover img-zoom">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <p class="text-xl font-bold mb-1">Divy Patel</p>
+                            <p class="text-sm text-[color:var(--brand-accent)]">Event Manager</p>
+                        </div>
+                    </div>
+                    <!-- Team Member 7 -->
+                    <div class="relative group overflow-hidden rounded-2xl h-80 fade-in premium-card stagger-6">
+                        <img src="images/team/deep.png"
+                            alt="Team Member" class="w-full h-full object-cover img-zoom">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <p class="text-xl font-bold mb-1">Deep Patel</p>
+                            <p class="text-sm text-[color:var(--brand-accent)]">Event Designer</p>
+                        </div>
+                    </div>
+                    <!-- Team Member 8 -->
+                    <div class="relative group overflow-hidden rounded-2xl h-80 fade-in premium-card stagger-6">
+                        <img src="images/team/tirth.png"
+                            alt="Team Member" class="w-full h-full object-cover img-zoom">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                            <p class="text-xl font-bold mb-1">Tirth Patel</p>
+                            <p class="text-sm text-[color:var(--brand-accent)]">Event Designer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Services Section -->
+        <section id="services" class="py-20 relative">
+            <div class="max-w-6xl mx-auto px-6 lg:px-12">
+                <div class="text-center mb-16 fade-in">
+                    <p class="text-sm uppercase tracking-[0.3em] text-[color:var(--brand-accent)] mb-4">What We Offer
+                    </p>
+                    <h2 class="text-4xl sm:text-5xl font-bold mb-4 serif">We Care About Every Detail</h2>
+                    <p class="text-lg text-white/70 max-w-2xl mx-auto">From the concept and script to the experience of
+                        your guests. We listen to your ideas and thoughtfully bring them to life.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="glass-dark rounded-3xl p-8 card-hover fade-in premium-card">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-[color:var(--brand-dark)] flex items-center justify-center mb-6">
+                            <i class="bx bx-briefcase-alt-2 text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Corporate Event Management</h3>
+                        <p class="text-white/70 mb-6">We manage professional business events that strengthen brand
+                            image and engagement.</p>
+                        <ul class="space-y-3 text-white/80">
+                            <li class="flex items-center gap-3"><i
+                                    class="bx bx-check text-[color:var(--brand-accent)]"></i>Conferences & seminars</li>
+                            <li class="flex items-center gap-3"><i
+                                    class="bx bx-check text-[color:var(--brand-accent)]"></i>Product launches</li>
+                            <li class="flex items-center gap-3"><i
+                                    class="bx bx-check text-[color:var(--brand-accent)]"></i>Annual meetings & award
+                                functions</li>
+                            <li class="flex items-center gap-3"><i
+                                    class="bx bx-check text-[color:var(--brand-accent)]"></i>Corporate parties</li>
+                            <li class="flex items-center gap-3"><i
+                                    class="bx bx-check text-[color:var(--brand-accent)]"></i>Exhibitions & trade shows
+                            </li>
+                            <li class="flex items-center gap-3"><i
+                                    class="bx bx-check text-[color:var(--brand-accent)]"></i>Team-building events</li>
+                        </ul>
+                    </div>
+                    <div class="glass-dark rounded-3xl p-8 card-hover fade-in premium-card">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-[color:var(--brand-dark)] flex items-center justify-center mb-6">
+                            <i class="bx bx-heart text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Social Event Management</h3>
+                        <p class="text-white/70 mb-6">We turn personal moments into beautiful memories. Every event is
+                            uniquely designed to match your style and emotions.</p>
+                        <ul class="space-y-3 text-white/80">
+                            <li class="flex items-center gap-3"><i
+                                    class="bx bx-check text-[color:var(--brand-accent)]"></i>Weddings & receptions</li>
+                            <li class="flex items-center gap-3"><i
+                                    class="bx bx-check text-[color:var(--brand-accent)]"></i>Engagement ceremonies</li>
+                            <li class="flex items-center gap-3"><i
+                                    class="bx bx-check text-[color:var(--brand-accent)]"></i>Birthday & theme parties
+                            </li>
+                            <li class="flex items-center gap-3"><i
+                                    class="bx bx-check text-[color:var(--brand-accent)]"></i>Anniversaries</li>
+                            <li class="flex items-center gap-3"><i
+                                    class="bx bx-check text-[color:var(--brand-accent)]"></i>Cultural & festive
+                                celebrations</li>
+                            <li class="flex items-center gap-3"><i
+                                    class="bx bx-check text-[color:var(--brand-accent)]"></i>Private family events</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="section-divider"></div>
+        <!-- Recent Events Section -->
+        <section id="recent-events" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-6 lg:px-12">
+                <div class="grid lg:grid-cols-2 gap-12 items-start">
+
+                    <!-- LEFT SIDE : TEXT CONTENT -->
+                    <div class="fade-in">
+                        <p class="text-sm uppercase tracking-[0.3em] text-[color:var(--brand-accent)] mb-6">
+                            Our Recent Conferences
+                        </p>
+
+                        <h2 class="text-4xl sm:text-5xl font-bold mb-8 serif">
+                            META MEDICON – NATIONAL DIABETES CONFERENCE, VADODARA
+                        </h2>
+
+                        <div
+                            class="space-y-6 text-white/80 leading-relaxed text-justify max-h-[500px] overflow-y-auto pr-4 scrollbar-hide">
+
+                            <p>
+                                Meta Medicon is a prestigious national-level diabetes conference that brought together
+                                eminent endocrinologists, physicians, researchers, and healthcare professionals from
+                                across India. Hosted in Vadodara, the conference served as a focused platform for
+                                scientific exchange, clinical excellence, and collaborative learning in diabetes care.
+                            </p>
+
+                            <p>
+                                Designed with precision and professionalism, the conference reflected the stature of
+                                a national medical gathering. From seamless registrations and well-curated scientific
+                                sessions to expert panel discussions and keynote lectures, every element was executed
+                                with clarity, discipline, and elegance.
+                            </p>
+
+                            <p>
+                                Meta Medicon featured evidence-based discussions on advanced diabetes management,
+                                emerging therapies, technology-driven care, and patient-centric treatment approaches.
+                                The sessions encouraged meaningful dialogue, practical insights, and knowledge
+                                sharing that directly supports real-world clinical practice.
+                            </p>
+
+                            <p class="italic text-[color:var(--brand-accent)]">
+                                “Advancing diabetes care through science, collaboration, and innovation —
+                                shaping a healthier future together.”
+                            </p>
+
+                            <p>
+                                With its strong academic foundation and refined execution, Meta Medicon established
+                                itself as a benchmark national conference, reinforcing Vadodara’s growing prominence
+                                as a destination for high-quality medical and scientific events.
+                            </p>
+
+                        </div>
+                    </div>
+
+                    <!-- RIGHT SIDE : IMAGE GALLERY -->
+                    <div class="fade-in">
+                        <p
+                            class="text-sm uppercase tracking-[0.3em] text-[color:var(--brand-accent)] mb-6 text-justify">
+                            A meticulously planned national medical conference — where scientific excellence meets
+                            refined execution
+                        </p>
+
+                        <!-- MAIN IMAGE -->
+                        <div class="relative overflow-hidden rounded-2xl mb-6 h-[500px] premium-card cursor-pointer"
+                            id="main-event-image-container">
+                            <img id="main-event-image" src="images/metamedicon/metamedicon1.jpg"
+                                alt="Meta Medicon Conference"
+                                class="w-full h-full object-cover img-zoom transition-opacity duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                        </div>
+
+                        <!-- THUMBNAIL CAROUSEL -->
+                        <div class="relative group">
+                            <div id="thumbnail-carousel" class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb active-thumb"
+                                    data-image="images/metamedicon/metamedicon1.jpg">
+                                    <img src="images/metamedicon/metamedicon1.jpg" alt="Conference Session"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/metamedicon/metamedicon2.jpg">
+                                    <img src="images/metamedicon/metamedicon2.jpg" alt="Medical Panel Discussion"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/metamedicon/metamedicon3.jpg">
+                                    <img src="images/metamedicon/metamedicon3.jpg" alt="Doctor Networking"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/metamedicon/metamedicon4.jpg">
+                                    <img src="images/metamedicon/metamedicon4.jpg" alt="Conference Auditorium"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/metamedicon/metamedicon5.jpg">
+                                    <img src="images/metamedicon/metamedicon5.jpg" alt="Conference Auditorium"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/metamedicon/metamedicon6.jpg">
+                                    <img src="images/metamedicon/metamedicon6.jpg" alt="Conference Auditorium"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/metamedicon/metamedicon7.jpg">
+                                    <img src="images/metamedicon/metamedicon7.jpg" alt="Conference Auditorium"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/metamedicon/metamedicon8.jpg">
+                                    <img src="images/metamedicon/metamedicon8.jpg" alt="Conference Auditorium"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/metamedicon/metamedicon9.jpg">
+                                    <img src="images/metamedicon/metamedicon9.jpg" alt="Conference Auditorium"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/metamedicon/metamedicon10.jpg">
+                                    <img src="images/metamedicon/metamedicon10.jpg" alt="Conference Auditorium"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/metamedicon/metamedicon11.jpg">
+                                    <img src="images/metamedicon/metamedicon11.jpg" alt="Conference Auditorium"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                                <div class="relative flex-shrink-0 w-32 h-24 rounded-xl overflow-hidden cursor-pointer group border-2 border-transparent hover:border-[color:var(--brand-accent)] transition-all event-thumb"
+                                    data-image="images/metamedicon/metamedicon12.jpg">
+                                    <img src="images/metamedicon/metamedicon12.jpg" alt="Conference Auditorium"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition"></div>
+                                </div>
+                            </div>
+
+                            <!-- NAVIGATION ARROWS -->
+                            <button id="prev-event-image"
+                                class="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-sm flex items-center justify-center text-white transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-110 z-10 shadow-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
+
+                            <button id="next-event-image"
+                                class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-sm flex items-center justify-center text-white transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-110 z-10 shadow-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Event Image Modal -->
+        <div id="event-image-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+            <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" id="event-modal-backdrop"></div>
+            <div class="relative z-10 max-w-6xl w-full max-h-[90vh] flex flex-col">
+                <button id="event-modal-close"
+                    class="absolute top-4 right-4 z-20 w-12 h-12 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-sm flex items-center justify-center text-white transition-all duration-300 hover:scale-110">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <div class="relative rounded-2xl overflow-hidden premium-card bg-black/40 backdrop-blur-md">
+                    <img id="event-modal-image" src="" alt="Event Image"
+                        class="w-full h-auto max-h-[85vh] object-contain">
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Complete Solutions -->
+        <section id="solutions" class="py-20 relative">
+            <div class="max-w-6xl mx-auto px-6 lg:px-12">
+                <div class="glass-dark rounded-3xl p-8 lg:p-12 fade-in">
+                    <div class="text-center mb-12">
+                        <p class="text-sm uppercase tracking-[0.3em] text-[color:var(--brand-accent)] mb-4">Complete
+                            Solutions</p>
+                        <h2 class="text-4xl sm:text-5xl font-bold mb-4 serif">End-to-End Event Services</h2>
+                        <p class="text-lg text-white/70">One team. One vision. One flawless event.</p>
+                    </div>
+                    <div class="grid md:grid-cols-3 sm:grid-cols-2 gap-6">
+                        <div class="flex items-center gap-3 text-white/80"><i
+                                class="bx bx-check text-[color:var(--brand-accent)] text-xl"></i>Event planning &
+                            concept
+                            development</div>
+                        <div class="flex items-center gap-3 text-white/80"><i
+                                class="bx bx-check text-[color:var(--brand-accent)] text-xl"></i>Theme & décor designing
+                        </div>
+                        <div class="flex items-center gap-3 text-white/80"><i
+                                class="bx bx-check text-[color:var(--brand-accent)] text-xl"></i>Stage, lighting & sound
+                            setup</div>
+                        <div class="flex items-center gap-3 text-white/80"><i
+                                class="bx bx-check text-[color:var(--brand-accent)] text-xl"></i>Audio-visual &
+                            technical
+                            support</div>
+                        <div class="flex items-center gap-3 text-white/80"><i
+                                class="bx bx-check text-[color:var(--brand-accent)] text-xl"></i>Artist & entertainment
+                            management</div>
+                        <div class="flex items-center gap-3 text-white/80"><i
+                                class="bx bx-check text-[color:var(--brand-accent)] text-xl"></i>Branding, signage &
+                            printing</div>
+                        <div class="flex items-center gap-3 text-white/80"><i
+                                class="bx bx-check text-[color:var(--brand-accent)] text-xl"></i>Guest & logistics
+                            coordination</div>
+                        <div class="flex items-center gap-3 text-white/80"><i
+                                class="bx bx-check text-[color:var(--brand-accent)] text-xl"></i>Vendor management</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Why Choose Us -->
+        <section id="why" class="py-20 relative">
+            <div class="max-w-6xl mx-auto px-6 lg:px-12">
+                <div class="text-center mb-16 fade-in">
+                    <p class="text-sm uppercase tracking-[0.3em] text-[color:var(--brand-accent)] mb-4">Why Choose Us
+                    </p>
+                    <h2 class="text-4xl sm:text-5xl font-bold mb-4 serif">Dream Events is All About</h2>
+                    <p class="text-xl text-[color:var(--brand-accent)] mb-2">Sophistication, Style, and Impeccable
+                        Service</p>
+                    <p class="text-lg text-white/70 max-w-2xl mx-auto">We don't just organize events — we create
+                        experiences.</p>
+                </div>
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <div class="glass-dark rounded-2xl p-6 card-hover fade-in">
+                        <i class="bx bx-star text-3xl text-[color:var(--brand-accent)] mb-4"></i>
+                        <p class="text-white font-semibold">Experienced and creative professionals</p>
+                    </div>
+                    <div class="glass-dark rounded-2xl p-6 card-hover fade-in">
+                        <i class="bx bx-customize text-3xl text-[color:var(--brand-accent)] mb-4"></i>
+                        <p class="text-white font-semibold">Customized event planning</p>
+                    </div>
+                    <div class="glass-dark rounded-2xl p-6 card-hover fade-in">
+                        <i class="bx bx-buildings text-3xl text-[color:var(--brand-accent)] mb-4"></i>
+                        <p class="text-white font-semibold">Strong vendor & venue coordination</p>
+                    </div>
+                    <div class="glass-dark rounded-2xl p-6 card-hover fade-in">
+                        <i class="bx bx-spreadsheet text-3xl text-[color:var(--brand-accent)] mb-4"></i>
+                        <p class="text-white font-semibold">Transparent budgeting & planning</p>
+                    </div>
+                    <div class="glass-dark rounded-2xl p-6 card-hover fade-in">
+                        <i class="bx bx-time-five text-3xl text-[color:var(--brand-accent)] mb-4"></i>
+                        <p class="text-white font-semibold">Timely execution</p>
+                    </div>
+                    <div class="glass-dark rounded-2xl p-6 card-hover fade-in">
+                        <i class="bx bx-badge-check text-3xl text-[color:var(--brand-accent)] mb-4"></i>
+                        <p class="text-white font-semibold">High-quality standards</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Testimonials -->
+        <!-- <section id="testimonials" class="py-20 relative">
+            <div class="max-w-6xl mx-auto px-6 lg:px-12">
+                <div class="text-center mb-16 fade-in">
+                    <p class="text-sm uppercase tracking-[0.3em] text-[color:var(--brand-accent)] mb-4">Client Feedback
+                    </p>
+                    <h2 class="text-4xl sm:text-5xl font-bold mb-4 serif">The Most Common Compliment</h2>
+                    <div class="inline-block px-6 py-3 rounded-full bg-[color:var(--brand-dark)] text-white mt-6">
+                        <p class="text-lg italic">"All we had to do was trust"</p>
+                        <p class="text-sm text-white/80 mt-2">The team took care of everything, and we enjoyed every
+                            minute of the planning</p>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="glass-dark rounded-3xl p-8 card-hover fade-in premium-card">
+                        <p class="text-sm uppercase tracking-wider text-[color:var(--brand-accent)] mb-4">Corporate Gala
+                        </p>
+                        <p class="text-white/90 mb-6 italic">"They handled executive logistics, multi-camera coverage,
+                            and
+                            a 360° LED stage with zero surprises."</p>
+                        <p class="font-semibold text-[color:var(--brand-accent)]">Head of Marketing, Tech</p>
+                    </div>
+                    <div class="glass-dark rounded-3xl p-8 card-hover fade-in premium-card">
+                        <p class="text-sm uppercase tracking-wider text-[color:var(--brand-accent)] mb-4">Luxury
+                            Celebration</p>
+                        <p class="text-white/90 mb-6 italic">"From secret invitations to live performers, the reveal
+                            moments felt like a movie premiere."</p>
+                        <p class="font-semibold text-[color:var(--brand-accent)]">Private Client</p>
+                    </div>
+                    <div class="glass-dark rounded-3xl p-8 card-hover fade-in premium-card">
+                        <p class="text-sm uppercase tracking-wider text-[color:var(--brand-accent)] mb-4">Destination
+                            Event</p>
+                        <p class="text-white/90 mb-6 italic">"Concierge-level travel, bespoke menu pairings, and stage
+                            effects synced to the skyline."</p>
+                        <p class="font-semibold text-[color:var(--brand-accent)]">Group CEO</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div> -->
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 relative">
+            <div class="max-w-6xl mx-auto px-6 lg:px-12">
+                <div class="text-center mb-16 fade-in">
+                    <p class="text-sm uppercase tracking-[0.3em] text-[color:var(--brand-accent)] mb-4">Get In Touch</p>
+                    <h2 class="text-4xl sm:text-5xl font-bold mb-4 serif">Tell Us About Your Event</h2>
+                    <p class="text-lg text-white/70 max-w-2xl mx-auto">Let's bring your event idea to life.</p>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <div class="glass-dark rounded-3xl p-8 lg:p-12 fade-in">
+                        <form id="contact-form" class="space-y-6">
+                            <div class="grid sm:grid-cols-2 gap-6">
+                                <input required name="name" type="text" placeholder="Full Name"
+                                    class="w-full px-5 py-4 rounded-xl bg-black/30 border border-white/10 text-white placeholder-white/50 focus:border-[color:var(--brand-accent)] focus:outline-none transition">
+                                <input required name="email" type="email" placeholder="Email Address"
+                                    class="w-full px-5 py-4 rounded-xl bg-black/30 border border-white/10 text-white placeholder-white/50 focus:border-[color:var(--brand-accent)] focus:outline-none transition">
+                            </div>
+                            <input required name="eventType" type="text"
+                                placeholder="Event Type (Conference, Wedding...)"
+                                class="w-full px-5 py-4 rounded-xl bg-black/30 border border-white/10 text-white placeholder-white/50 focus:border-[color:var(--brand-accent)] focus:outline-none transition">
+                            <textarea required name="message" rows="5" placeholder="Tell us about your event"
+                                class="w-full px-5 py-4 rounded-xl bg-black/30 border border-white/10 text-white placeholder-white/50 focus:border-[color:var(--brand-accent)] focus:outline-none transition resize-none"></textarea>
+                            <button type="submit"
+                                class="w-full px-8 py-4 rounded-full bg-[color:var(--brand-dark)] text-white font-semibold hover-lift btn-premium glow-green relative z-10">
+                                Book a Free Consultation</button>
+                        </form>
+                    </div>
+                    <div
+                        class="glass-dark rounded-3xl p-8 lg:p-12 bg-gradient-to-br from-[color:var(--brand-dark)]/50 to-black/50 fade-in">
+                        <p class="text-sm uppercase tracking-[0.2em] text-[color:var(--brand-accent)] mb-4">Dream Events
+                        </p>
+                        <h3 class="text-3xl serif font-bold mb-4">Where Every Event Becomes a Memory</h3>
+                        <p class="text-white/70 mb-8">Corporate & Social Event Management</p>
+                        <div class="space-y-4 mb-8">
+                            <p class="flex items-center gap-3 text-white/80"><i
+                                    class="bx bx-map text-[color:var(--brand-accent)]"></i>Ahmedabad, Gujarat</p>
+                            <p class="flex items-center gap-3 text-white/80"><i
+                                    class="bx bx-phone text-[color:var(--brand-accent)]"></i>+91 72019 17846</p>
+                            <p class="flex items-center gap-3 text-white/80"><i
+                                    class="bx bx-envelope text-[color:var(--brand-accent)]"></i>support@thedreamevent.in
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="#services"
+                                class="px-6 py-3 rounded-full bg-[color:var(--brand-accent)] text-[color:var(--brand-dark)] font-semibold hover-lift">
+                                View Services</a>
+                            <a href="#gallery"
+                                class="px-6 py-3 rounded-full border border-[color:var(--brand-accent)] text-white font-semibold hover:bg-[color:var(--brand-accent)]/10 transition">
+                                See Gallery</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/10">
+        <div class="max-w-6xl mx-auto px-6 lg:px-12">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-6">
+                <div>
+                    <p class="serif text-2xl text-white mb-2">Dream Events</p>
+                    <p class="text-sm text-white/60">Corporate & Social Event Management</p>
+                    <p class="text-sm text-white/60 mt-2">"Where Every Event Becomes a Memory"</p>
+                </div>
+                <div class="text-sm text-white/60 text-center sm:text-right">
+                    <p>© <span id="year"></span> Dream Events. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Scroll progress indicator
+        const scrollIndicator = document.getElementById('scrollIndicator');
+        globalThis.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercentage = (scrollTop / scrollHeight) * 100;
+            scrollIndicator.style.width = scrollPercentage + '%';
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        globalThis.addEventListener('scroll', () => {
+            if (globalThis.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in, .img-reveal, .gallery-item, .scroll-fade').forEach(el => {
+            fadeObserver.observe(el);
+        });
+
+        // Counter animation
+        const counters = document.querySelectorAll('.counter');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                    entry.target.classList.add('counted');
+                    const target = Number.parseInt(entry.target.dataset.target, 10);
+                    const duration = 2000;
+                    const increment = target / (duration / 16);
+                    let current = 0;
+                    const getSuffix = (val) => {
+                        if (val === 150) return '+';
+                        if (val === 98) return '%';
+                        return 'yr';
+                    };
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            entry.target.textContent = target + getSuffix(target);
+                            clearInterval(timer);
+                        } else {
+                            entry.target.textContent = Math.floor(current) + getSuffix(target);
+                        }
+                    }, 16);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(counter => {
+            counterObserver.observe(counter);
+        });
+
+        // Parallax effect on scroll
+        globalThis.addEventListener('scroll', () => {
+            const scrolled = globalThis.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax-slow');
+            parallaxElements.forEach(element => {
+                const speed = 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        const form = document.getElementById('contact-form');
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const data = new FormData(form);
+                const name = data.get('name') || '';
+                const email = data.get('email') || '';
+                const eventType = data.get('eventType') || '';
+                const message = data.get('message') || '';
+                const subject = encodeURIComponent(`New Event Inquiry: ${eventType}`);
+                const body = encodeURIComponent(
+                    `Name: ${name}\nEmail: ${email}\nEvent Type: ${eventType}\n\nMessage:\n${message}`
+                );
+                const mailtoLink = `mailto:support@thedreamevent.in?subject=${subject}&body=${body}`;
+                globalThis.location.href = mailtoLink;
+            });
+        }
+
+        // Mouse parallax effect for hero
+        const hero = document.querySelector('header');
+        if (hero) {
+            hero.addEventListener('mousemove', (e) => {
+                const { clientX, clientY } = e;
+                const { width, height } = hero.getBoundingClientRect();
+                const xPos = (clientX / width - 0.5) * 20;
+                const yPos = (clientY / height - 0.5) * 20;
+                const orbs = hero.querySelectorAll('.orb');
+                orbs.forEach((orb, index) => {
+                    const speed = (index + 1) * 0.5;
+                    orb.style.transform = `translate(${xPos * speed}px, ${yPos * speed}px)`;
+                });
+            });
+        }
+
+        // Event thumbnail carousel
+        const eventThumbs = document.querySelectorAll('.event-thumb');
+        const mainEventImage = document.getElementById('main-event-image');
+        const prevButton = document.getElementById('prev-event-image');
+        const nextButton = document.getElementById('next-event-image');
+        const thumbnailCarousel = document.getElementById('thumbnail-carousel');
+
+        let currentImageIndex = 0;
+
+        function scrollToThumbnail(index) {
+            if (!thumbnailCarousel || eventThumbs.length === 0) return;
+
+            const thumb = eventThumbs[index];
+            if (!thumb) return;
+
+            const thumbLeft = thumb.offsetLeft;
+            const thumbWidth = thumb.offsetWidth;
+            const carouselWidth = thumbnailCarousel.offsetWidth;
+
+            // Calculate scroll position to center the thumbnail
+            const targetScroll = thumbLeft - (carouselWidth / 2) + (thumbWidth / 2);
+
+            thumbnailCarousel.scrollTo({
+                left: targetScroll,
+                behavior: 'smooth'
+            });
+        }
+
+        function updateMainImage(index) {
+            if (eventThumbs.length === 0 || !mainEventImage) return;
+
+            // Ensure index is within bounds
+            if (index < 0) index = eventThumbs.length - 1;
+            if (index >= eventThumbs.length) index = 0;
+
+            currentImageIndex = index;
+            const thumb = eventThumbs[index];
+            const newImageSrc = thumb.dataset.image;
+
+            if (newImageSrc) {
+                // Remove active class from all thumbs
+                eventThumbs.forEach(t => t.classList.remove('active-thumb'));
+                // Add active class to current thumb
+                thumb.classList.add('active-thumb');
+                // Scroll to show the active thumbnail
+                scrollToThumbnail(index);
+                // Update main image with fade effect
+                mainEventImage.style.opacity = '0';
+                setTimeout(() => {
+                    mainEventImage.src = newImageSrc;
+                    mainEventImage.style.opacity = '1';
+                }, 200);
+            }
+        }
+
+        if (eventThumbs.length > 0 && mainEventImage) {
+            // Thumbnail click handler
+            eventThumbs.forEach((thumb, index) => {
+                thumb.addEventListener('click', () => {
+                    updateMainImage(index);
+                });
+            });
+
+            // Previous button handler
+            if (prevButton) {
+                prevButton.addEventListener('click', () => {
+                    updateMainImage(currentImageIndex - 1);
+                });
+            }
+
+            // Next button handler
+            if (nextButton) {
+                nextButton.addEventListener('click', () => {
+                    updateMainImage(currentImageIndex + 1);
+                });
+            }
+        }
+
+        // Event Image Modal
+        const eventImageModal = document.getElementById('event-image-modal');
+        const eventModalImage = document.getElementById('event-modal-image');
+        const eventModalClose = document.getElementById('event-modal-close');
+        const eventModalBackdrop = document.getElementById('event-modal-backdrop');
+        const mainEventImageContainer = document.getElementById('main-event-image-container');
+
+        function openEventImageModal(imageSrc) {
+            if (!eventImageModal || !eventModalImage) return;
+
+            eventModalImage.src = imageSrc;
+            eventImageModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeEventImageModal() {
+            if (!eventImageModal) return;
+
+            eventImageModal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        // Open modal on main image click
+        if (mainEventImageContainer && mainEventImage) {
+            mainEventImageContainer.addEventListener('click', () => {
+                const imageSrc = mainEventImage.src;
+                if (imageSrc) {
+                    openEventImageModal(imageSrc);
+                }
+            });
+        }
+
+        // Open modal on thumbnail click (in addition to changing main image)
+        if (eventThumbs.length > 0) {
+            eventThumbs.forEach((thumb) => {
+                thumb.addEventListener('click', (e) => {
+                    // Don't prevent the default behavior (changing main image)
+                    // But also open the modal
+                    const imageSrc = thumb.dataset.image;
+                    if (imageSrc) {
+                        // Small delay to ensure main image is updated first
+                        setTimeout(() => {
+                            openEventImageModal(imageSrc);
+                        }, 250);
+                    }
+                });
+            });
+        }
+
+        // Close modal on close button click
+        if (eventModalClose) {
+            eventModalClose.addEventListener('click', closeEventImageModal);
+        }
+
+        // Close modal on backdrop click
+        if (eventModalBackdrop) {
+            eventModalBackdrop.addEventListener('click', closeEventImageModal);
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && eventImageModal && !eventImageModal.classList.contains('hidden')) {
+                closeEventImageModal();
+            }
+        });
+
+        // Floating Contact Buttons
+        const whatsappButton = document.getElementById('whatsapp-button');
+        const telegramButton = document.getElementById('telegram-button');
+
+        if (whatsappButton) {
+            whatsappButton.addEventListener('click', () => {
+                const phoneNumber = '7201917846';
+                const message = encodeURIComponent('Hello! I would like to know more about your event services.');
+                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+                window.open(whatsappUrl, '_blank');
+            });
+        }
+
+        if (telegramButton) {
+            telegramButton.addEventListener('click', () => {
+                const phoneNumber = '7201917846';
+                const telegramUrl = `https://t.me/${phoneNumber}`;
+                window.open(telegramUrl, '_blank');
+            });
+        }
+
+    </script>
+
+    <!-- Floating Contact Buttons -->
+    <!-- <div class="floating-buttons">
+        <div id="whatsapp-button" class="floating-button whatsapp" title="Chat on WhatsApp">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+        </div>
+       
+    </div> -->
+</body>
+
+</html>

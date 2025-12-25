@@ -588,37 +588,61 @@
     <div class="scroll-indicator" id="scrollIndicator"></div>
 
     <!-- Navigation -->
-    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-6 lg:px-12 py-6">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <img src="assets/logo.jpg" alt="Dream Events" class="w-11 h-11 rounded-2xl">
-                <div>
-                    <p class="serif text-2xl text-white leading-5">The dream</p>
-                    <p class="text-xs tracking-[0.2em] uppercase text-[color:var(--brand-accent)]">Event Management</p>
-                </div>
-            </div>
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
-                <a href="#about" class="text-white/80 hover:text-white transition">About</a>
-                <a href="#services" class="text-white/80 hover:text-white transition">Services</a>
-                <div class="dropdown">
-                    <a href="#" class="text-white/80 hover:text-white transition flex items-center gap-1">
-                        Portfolio
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </a>
-                    <div class="dropdown-menu">
-                        <a href="corporate.html">Corporate</a>
-                        <a href="social.html">Social</a>
-                    </div>
-                </div>
-                <a href="#contact"
-                    class="px-5 py-2 rounded-full bg-[color:var(--brand-dark)] text-white hover:bg-[#2d4f41] transition btn-shine">Plan
-                    Your Event</a>
+    <nav id="navbar"
+    class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-12 py-4 sm:py-6 flex flex-col gap-3">
+
+    <div class="max-w-7xl mx-auto flex items-center justify-between w-full">
+
+        <!-- LOGO -->
+        <div class="flex items-center gap-3">
+            <img src="assets/logo.jpg" alt="Dream Events" class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl">
+            <div>
+                <p class="serif text-xl sm:text-2xl text-white leading-5">The dream</p>
+                <p class="text-[10px] sm:text-xs tracking-[0.2em] uppercase text-[color:var(--brand-accent)]">
+                    Event Management</p>
             </div>
         </div>
-    </nav>
+
+        <!-- DESKTOP MENU -->
+        <div class="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-medium">
+            <a href="#about" class="text-white/80 hover:text-white transition">About</a>
+            <a href="#services" class="text-white/80 hover:text-white transition">Services</a>
+
+            <div class="dropdown relative">
+                <button class="flex items-center gap-1 text-white/80 hover:text-white transition">
+                    Portfolio
+                    <i class='bx bx-chevron-down text-lg'></i>
+                </button>
+
+                <div class="dropdown-menu absolute hidden bg-black/90 backdrop-blur-lg rounded-xl mt-2 p-2">
+                    <a href="corporate.html" class="block px-4 py-2 hover:bg-white/10 rounded-lg">Corporate</a>
+                    <a href="social.html" class="block px-4 py-2 hover:bg-white/10 rounded-lg">Social</a>
+                </div>
+            </div>
+
+            <a href="#contact"
+                class="px-5 py-2 rounded-full bg-[color:var(--brand-dark)] text-white hover:bg-[#2d4f41] transition">
+                Plan Your Event</a>
+        </div>
+
+        <!-- MOBILE MENU BUTTON -->
+        <button id="menuToggle" class="md:hidden text-white text-3xl">
+            <i class='bx bx-menu'></i>
+        </button>
+    </div>
+
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu"
+        class="hidden md:hidden bg-black/90 backdrop-blur-xl rounded-2xl px-6 pb-6 max-w-7xl mx-auto w-full">
+        <a href="#about" class="block py-2 text-white/80 hover:text-white">About</a>
+        <a href="#services" class="block py-2 text-white/80 hover:text-white">Services</a>
+        <a href="corporate.html" class="block py-2 text-white/80 hover:text-white">Corporate</a>
+        <a href="social.html" class="block py-2 text-white/80 hover:text-white">Social</a>
+        <a href="#contact"
+            class="mt-3 block text-center px-5 py-2 rounded-full bg-[color:var(--brand-dark)] text-white">
+            Plan Your Event</a>
+    </div>
+</nav>
 
     <!-- Hero Section -->
     <header class="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -728,120 +752,114 @@
         <!-- Team Section -->
         <section id="team" class="py-20 relative">
             <div class="max-w-6xl mx-auto px-6 lg:px-12">
-                <div class="text-center mb-16 fade-in">
-                    <p class="text-sm uppercase tracking-[0.3em] text-[color:var(--brand-accent)] mb-4">Our Team</p>
-                    <h2 class="text-4xl sm:text-5xl font-bold mb-4 serif">Meet the Dream Team</h2>
-                    <p class="text-lg text-white/70 max-w-2xl mx-auto">Passionate professionals dedicated to creating
-                        extraordinary events</p>
+          
+              <div class="text-center mb-16 fade-in">
+                <p class="text-sm uppercase tracking-[0.3em] text-[color:var(--brand-accent)] mb-4">
+                  Our Team
+                </p>
+                <h2 class="text-4xl sm:text-5xl font-bold mb-4 serif">Meet the Dream Team</h2>
+                <p class="text-lg text-white/70 max-w-2xl mx-auto">
+                  Passionate professionals dedicated to creating extraordinary events
+                </p>
+              </div>
+          
+              <!-- GRID -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          
+                <!-- Member 1 -->
+                <div class="relative group overflow-hidden rounded-2xl aspect-[3/4] fade-in premium-card">
+                  <img src="images/team/yash.png" alt="Yash Patel"
+                    class="w-full h-full object-cover img-zoom">
+          
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+          
+                  <div class="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 transition duration-500">
+                    <p class="text-xl font-bold mb-1">Yash Patel</p>
+                    <p class="text-sm text-[color:var(--brand-accent)]">Event Planner</p>
+                  </div>
                 </div>
-                <div class="grid md:grid-cols-4 sm:grid-cols-2 gap-6">
-                    <!-- Team Member 1 -->
-                    <div class="relative group overflow-hidden rounded-2xl h-80 fade-in premium-card">
-                        <img src="images/team/yash.png"
-                            alt="Team Member" class="w-full h-full object-cover img-zoom">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        </div>
-                        <div
-                            class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                            <p class="text-xl font-bold mb-1">Yash Patel</p>
-                            <p class="text-sm text-[color:var(--brand-accent)]">Event Planner</p>
-                        </div>
-                    </div>
-                    <!-- Team Member 2 -->
-                    <div class="relative group overflow-hidden rounded-2xl h-80 fade-in premium-card stagger-1">
-                        <img src="images/team/jaypatel.png"
-                            alt="Team Member" class="w-full h-full object-cover img-zoom">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        </div>
-                        <div
-                            class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                            <p class="text-xl font-bold mb-1">Jay Patel</p>
-                            <p class="text-sm text-[color:var(--brand-accent)]">Event Planner</p>
-                        </div>
-                    </div>
-                    <!-- Team Member 3 -->
-                    <div class="relative group overflow-hidden rounded-2xl h-80 fade-in premium-card stagger-2">
-                        <img src="images/team/jay.png"
-                            alt="Team Member" class="w-full h-full object-cover img-zoom">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        </div>
-                        <div
-                            class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                            <p class="text-xl font-bold mb-1">Jay Patel</p>
-                            <p class="text-sm text-[color:var(--brand-accent)]">Event Planner</p>
-                        </div>
-                    </div>
-                    <!-- Team Member 4 -->
-                    <div class="relative group overflow-hidden rounded-2xl h-80 fade-in premium-card stagger-3">
-                        <img src="images/team/sumit.png"
-                            alt="Team Member" class="w-full h-full object-cover img-zoom">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        </div>
-                        <div
-                            class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                            <p class="text-xl font-bold mb-1">Sumit Patel</p>
-                            <p class="text-sm text-[color:var(--brand-accent)]">Event Manager</p>
-                        </div>
-                    </div>
-                    <!-- Team Member 5 -->
-                    <div class="relative group overflow-hidden rounded-2xl h-80 fade-in premium-card stagger-4">
-                        <img src="images/team/kirtan.png"
-                            alt="Team Member" class="w-full h-full object-cover img-zoom">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        </div>
-                        <div
-                            class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                            <p class="text-xl font-bold mb-1">Kirtan Patel</p>
-                            <p class="text-sm text-[color:var(--brand-accent)]">Event Manager</p>
-                        </div>
-                    </div>
-                    <!-- Team Member 6 -->
-                    <div class="relative group overflow-hidden rounded-2xl h-80 fade-in premium-card stagger-5">
-                        <img src="images/team/divy.png"
-                            alt="Team Member" class="w-full h-full object-cover img-zoom">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        </div>
-                        <div
-                            class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                            <p class="text-xl font-bold mb-1">Divy Patel</p>
-                            <p class="text-sm text-[color:var(--brand-accent)]">Event Manager</p>
-                        </div>
-                    </div>
-                    <!-- Team Member 7 -->
-                    <div class="relative group overflow-hidden rounded-2xl h-80 fade-in premium-card stagger-6">
-                        <img src="images/team/deep.png"
-                            alt="Team Member" class="w-full h-full object-cover img-zoom">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        </div>
-                        <div
-                            class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                            <p class="text-xl font-bold mb-1">Deep Patel</p>
-                            <p class="text-sm text-[color:var(--brand-accent)]">Event Designer</p>
-                        </div>
-                    </div>
-                    <!-- Team Member 8 -->
-                    <div class="relative group overflow-hidden rounded-2xl h-80 fade-in premium-card stagger-6">
-                        <img src="images/team/tirth.png"
-                            alt="Team Member" class="w-full h-full object-cover img-zoom">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                        </div>
-                        <div
-                            class="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                            <p class="text-xl font-bold mb-1">Tirth Patel</p>
-                            <p class="text-sm text-[color:var(--brand-accent)]">Event Designer</p>
-                        </div>
-                    </div>
+          
+                <!-- Member 2 -->
+                <div class="relative group overflow-hidden rounded-2xl aspect-[3/4] fade-in premium-card">
+                  <img src="images/team/jaypatel.png" alt="Jay Patel"
+                    class="w-full h-full object-cover img-zoom">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                  <div class="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 transition duration-500">
+                    <p class="text-xl font-bold mb-1">Jay Patel</p>
+                    <p class="text-sm text-[color:var(--brand-accent)]">Event Planner</p>
+                  </div>
                 </div>
+          
+                <!-- Member 3 -->
+                <div class="relative group overflow-hidden rounded-2xl aspect-[3/4] fade-in premium-card">
+                  <img src="images/team/jay.png" alt="Jay Patel"
+                    class="w-full h-full object-cover img-zoom">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                  <div class="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 transition duration-500">
+                    <p class="text-xl font-bold mb-1">Jay Patel</p>
+                    <p class="text-sm text-[color:var(--brand-accent)]">Event Planner</p>
+                  </div>
+                </div>
+          
+                <!-- Member 4 -->
+                <div class="relative group overflow-hidden rounded-2xl aspect-[3/4] fade-in premium-card">
+                  <img src="images/team/sumit.png" alt="Sumit Patel"
+                    class="w-full h-full object-cover img-zoom">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                  <div class="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 transition duration-500">
+                    <p class="text-xl font-bold mb-1">Sumit Patel</p>
+                    <p class="text-sm text-[color:var(--brand-accent)]">Event Manager</p>
+                  </div>
+                </div>
+          
+                <!-- Member 5 -->
+                <div class="relative group overflow-hidden rounded-2xl aspect-[3/4] fade-in premium-card">
+                  <img src="images/team/kirtan.png" alt="Kirtan Patel"
+                    class="w-full h-full object-cover img-zoom">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                  <div class="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 transition duration-500">
+                    <p class="text-xl font-bold mb-1">Kirtan Patel</p>
+                    <p class="text-sm text-[color:var(--brand-accent)]">Event Manager</p>
+                  </div>
+                </div>
+          
+                <!-- Member 6 -->
+                <div class="relative group overflow-hidden rounded-2xl aspect-[3/4] fade-in premium-card">
+                  <img src="images/team/divy.png" alt="Divy Patel"
+                    class="w-full h-full object-cover img-zoom">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                  <div class="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 transition duration-500">
+                    <p class="text-xl font-bold mb-1">Divy Patel</p>
+                    <p class="text-sm text-[color:var(--brand-accent)]">Event Manager</p>
+                  </div>
+                </div>
+          
+                <!-- Member 7 -->
+                <div class="relative group overflow-hidden rounded-2xl aspect-[3/4] fade-in premium-card">
+                  <img src="images/team/deep.png" alt="Deep Patel"
+                    class="w-full h-full object-cover img-zoom">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                  <div class="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 transition duration-500">
+                    <p class="text-xl font-bold mb-1">Deep Patel</p>
+                    <p class="text-sm text-[color:var(--brand-accent)]">Event Designer</p>
+                  </div>
+                </div>
+          
+                <!-- Member 8 -->
+                <div class="relative group overflow-hidden rounded-2xl aspect-[3/4] fade-in premium-card">
+                  <img src="images/team/tirth.png" alt="Tirth Patel"
+                    class="w-full h-full object-cover img-zoom">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                  <div class="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 transition duration-500">
+                    <p class="text-xl font-bold mb-1">Tirth Patel</p>
+                    <p class="text-sm text-[color:var(--brand-accent)]">Event Designer</p>
+                  </div>
+                </div>
+          
+              </div>
             </div>
-        </section>
+          </section>
+          
 
         <div class="section-divider"></div>
 
@@ -1607,7 +1625,26 @@
         }
 
     </script>
-
+    <script>
+        const menuToggle = document.getElementById("menuToggle");
+        const mobileMenu = document.getElementById("mobileMenu");
+      
+        // toggle menu
+        menuToggle?.addEventListener("click", (e) => {
+          e.stopPropagation(); // prevent body click
+          mobileMenu.classList.toggle("hidden");
+        });
+      
+        // close when clicking outside
+        document.addEventListener("click", (e) => {
+          const isClickInsideMenu = mobileMenu.contains(e.target);
+          const isClickOnToggle = menuToggle.contains(e.target);
+      
+          if (!isClickInsideMenu && !isClickOnToggle) {
+            mobileMenu.classList.add("hidden");
+          }
+        });
+      </script>
     <!-- Floating Contact Buttons -->
     <!-- <div class="floating-buttons">
         <div id="whatsapp-button" class="floating-button whatsapp" title="Chat on WhatsApp">
